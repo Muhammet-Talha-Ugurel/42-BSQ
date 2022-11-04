@@ -1,7 +1,7 @@
 NAME = bsq
 SOURCE_DIR = src/
 HEADER_DIR = lib/
-FUNCTIONS = ft_lib ft_file ft_file2 bsq
+FUNCTIONS = ft_lib ft_file ft_file2 bsq bsq2
 FLAGS =
 MAIN = main.c
 

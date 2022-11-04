@@ -32,19 +32,19 @@ char	**create_soliton_arry(int len_x, int len_y)
 	j = 0;
 	str = (char **)malloc(sizeof(char *) * (len_y + 2));
 	str[len_y] = 0;
-	while (len_y > i)
+	while ((len_y + 1) > i)
 	{
 		str[i] = (char *)malloc(sizeof(char) * (len_x + 2));
 		i++;
 	}
 	i = 0;
-	while (str[0][i])
+	while (len_x > i)
 	{
 		str[0][i] = '0';
 		i++;
 	}
 	i = 0;
-	while (str[0][i])
+	while (len_y > i)
 	{
 		str[i][0] = '0';
 		i++;

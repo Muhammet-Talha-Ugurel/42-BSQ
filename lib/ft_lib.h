@@ -13,6 +13,13 @@
 #ifndef FT_LIB_H
 # define FT_LIB_H
 
+typedef struct s_point
+{
+	int	max;
+	int	x_pos;
+	int	y_pos;
+}				s_point;
+
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
 int		ft_strlen(char *str);
@@ -26,5 +33,9 @@ char	**ft_create_map_arry(int fd, int len_x, int len_y);
 void	mtu_bsq(char *fd_name);
 char	**create_soliton_arry(int len_x, int len_y);
 int		check_obstacle(char **map,int x_pos,int y_pos);
+int		min_num(int left, int top, int cross);
+int		check_lef_top_cros(char **sarry, int x_pos, int y_pos);
+int		bigest_num_in_sarry(char **sarry);
+s_point	first_bigest_num_in_sarry(char **sarry, int cmax);
 
 #endif // FT_LIB_H
