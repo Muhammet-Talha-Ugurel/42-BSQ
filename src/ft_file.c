@@ -6,7 +6,7 @@
 /*   By: mugurel <muhammedtalhaugurel@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:53:40 by mugurel           #+#    #+#             */
-/*   Updated: 2022/11/03 17:43:04 by mugurel          ###   ########.fr       */
+/*   Updated: 2022/11/10 03:49:16 by mugurel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ int	ft_map_len_x(int fd)
 			break ;
 		i++;
 	}
+	i = 0;
+	while (read(fd, c, 1) != 0)
+	{
+		if (c[0] == '\n')
+			break ;
+		i++;
+	}
 	return (i);
 }
 
@@ -49,7 +56,7 @@ int	ft_map_len_y(int fd)
 	int		i;
 	char	c[1];
 
-	i = 0;
+	i = -1;
 	while (read(fd, c, 1) != 0)
 	{
 		if (c[0] == '\n')
@@ -58,29 +65,31 @@ int	ft_map_len_y(int fd)
 	return (i);
 }
 
-char	**ft_read_file(int fd, int len_x, int len_y)
+char	**ft_read_file(int fd, int len_x, int len_y, char **str)
 {
 	char	c[1];
-	char	**str;
 	int		x;
 	int		y;
 
-	x = 0;
+	x = -1;
 	y = 0;
-	str = ft_create_map_arry(fd, len_x, len_y);
+	read(fd, c, 1);
+	while (c[0] != '\n')
+		read(fd, c, 1);
 	while (len_y > y)
 	{
-		while (len_x > x)
+		while (len_x > ++x)
 		{
 			read(fd, c, 1);
-			if (c[0] != '\n')
+			if (c[0] == '\n')
 			{
-				str[y][x] = c[0];
-				x++;
+				y++;
+				break ;
 			}
+			else
+				str[y][x] = c[0];
 		}
-		x = 0;
-		y++;
+		x = -1;
 	}
 	return (str);
 }

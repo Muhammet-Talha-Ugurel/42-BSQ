@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bsq2.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mugurel <muhammedtalhaugurel@gmai...>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/05 01:51:10 by mugurel           #+#    #+#             */
+/*   Updated: 2022/11/10 03:59:53 by mugurel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "../lib/ft_lib.h"
 
-int	check_obstacle(char **map,int x_pos,int y_pos)
+int	check_obstacle(t_map map, int x_pos, int y_pos)
 {
-	if (map[y_pos][x_pos] == 'o')
+	if (map.map[y_pos][x_pos] == map.obstacle)
 		return (1);
 	else
 		return (0);
@@ -13,36 +25,35 @@ int	check_obstacle(char **map,int x_pos,int y_pos)
 
 int	min_num(int left, int top, int cross)
 {
-	if(left < top && left < cross)
+	if (left < top && left < cross)
 	{
 		return (left);
 	}
-	else if(top < cross)
+	else if (top < cross)
 	{
 		return (top);
 	}
 	else
 	{
-		return(cross);
+		return (cross);
 	}
-
 }
 
-int	check_lef_top_cros(char **sarry, int x_pos, int y_pos)
+int	check_lef_top_cros(int **sarry, int x_pos, int y_pos)
 {
 	int	left;
 	int	top;
 	int	cross;
-	int min;
+	int	min;
 
-	left = sarry[(y_pos + 1)][x_pos] - 48;
-	top = sarry[y_pos][(x_pos + 1)] - 48;
-	cross = sarry[y_pos][x_pos] - 48;
+	left = sarry[(y_pos + 1)][x_pos];
+	top = sarry[y_pos][(x_pos + 1)];
+	cross = sarry[y_pos][x_pos];
 	min = min_num(left, top, cross);
 	return (min);
 }
 
-int	bigest_num_in_sarry(char **sarry)
+int	bigest_num_in_sarry(int **sarry, t_map map)
 {
 	int	i;
 	int	j;
@@ -51,13 +62,13 @@ int	bigest_num_in_sarry(char **sarry)
 	i = 0;
 	j = 0;
 	cmax = 0;
-	while (sarry[i] != 0)
+	while (i <= map.y)
 	{
-		while (sarry[i][j] != 0 )
+		while (j <= map.x)
 		{
-			if ((sarry[i][j] - 48) > cmax)
+			if (sarry[i][j] > cmax)
 			{
-				cmax = sarry[i][j] - 48;
+				cmax = sarry[i][j];
 			}
 			j++;
 		}
@@ -67,19 +78,19 @@ int	bigest_num_in_sarry(char **sarry)
 	return (cmax);
 }
 
-s_point	first_bigest_num_in_sarry(char **sarry, int cmax)
+t_point	first_bigest_num_in_sarry(int **sarry, int cmax, t_map map)
 {
-	int	y;
-	int	x;
-	s_point loc;
+	int		y;
+	int		x;
+	t_point	loc;
 
 	y = 0;
 	x = 0;
-	while (sarry[y] != 0)
+	while (y <= map.y)
 	{
-		while (sarry[y][x] != 0 )
+		while (x <= map.x)
 		{
-			if ((sarry[y][x] - 48) == cmax)
+			if (sarry[y][x] == cmax)
 			{
 				loc.x_pos = x;
 				loc.y_pos = y;

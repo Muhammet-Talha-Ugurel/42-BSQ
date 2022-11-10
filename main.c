@@ -6,7 +6,7 @@
 /*   By: mugurel <muhammedtalhaugurel@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 18:25:20 by mugurel           #+#    #+#             */
-/*   Updated: 2022/11/03 17:43:17 by mugurel          ###   ########.fr       */
+/*   Updated: 2022/11/05 01:59:48 by mugurel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	imap = 1;
 	if (ac == 1)
 	{
-		// standart dosyayi okuma
+		mtu_bsq("text.txt");
 	}
 	if (ac > 1)
 	{
